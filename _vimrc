@@ -287,6 +287,93 @@ if has("autocmd")
     au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
 
     " 保存编辑状态
-    au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
-    au BufRead     * if expand('%') != '' && &buftype == '' | silent loadview | syntax on | endif
+    " au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
+    " au BufRead     * if expand('%') != '' && &buftype == '' | silent loadview | syntax on | endif
+    au BufRead,BufNewFile *.j2,*.mustache set filetype=html
+    au BufRead,BufNewFile *.k set filetype=javascript
+    au BufRead,BufNewFile *.sibilant set filetype=scheme
+    autocmd FileType html,jade,javascript,scheme,coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+endif
+
+" =========
+" GUI
+" =========
+if has('gui_running')
+    " 只显示菜单
+    " set guioptions=mcr
+
+    if has("win32")
+        " Windows 兼容配置
+        source $VIMRUNTIME/mswin.vim
+
+        " f11 最大化
+        nmap <f11> :call libcallnr('fullscreen.dll', 'ToggleFullScreen', 0)<cr>
+        nmap <Leader>ff :call libcallnr('fullscreen.dll', 'ToggleFullScreen', 0)<cr>
+
+        " 自动最大化窗口
+        au GUIEnter * simalt ~x
+
+        " 给 Win32 下的 gVim 窗口设置透明度
+        "au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 250)
+
+        " 字体配置
+        exec 'set guifont='.iconv('Courier_New', &enc, 'gbk').':h10:cANSI'
+        "exec 'set guifontwide='.iconv('Microsoft\ YaHei', &enc, 'gbk').':h10'
+    endif
+
+    " Under Mac 我还没有mac不进行设置
+    if has("gui_macvim")
+        " MacVim 下的字体配置
+        set guifont=Source\ Code\ Pro\ Light:h12
+        set guifontwide=微软雅黑:h12
+
+        " 半透明和窗口大小
+        set transparency=2
+        set lines=40 columns=100
+
+        " 使用 MacVim 原生的全屏幕功能
+        let s:lines=&lines
+        let s:columns=&columns
+
+        func! FullScreenEnter()
+            set lines=999 columns=999
+            set fu
+        endf
+
+        func! FullScreenLeave()
+            let &lines=s:lines
+            let &columns=s:columns
+            set nofu
+        endf
+
+        func! FullScreenToggle()
+            if &fullscreen
+                call FullScreenLeave()
+            else
+                call FullScreenEnter()
+            endif
+        endf
+
+        set guioptions+=e
+        " Mac 下，按 <Leader>ff 切换全屏
+        nmap <f11> :call FullScreenToggle()<cr>
+        nmap <Leader>ff  :call FullScreenToggle()<cr>
+
+        " I like TCSH :^)
+        set shell=/bin/tcsh
+
+        " Set input method off
+        set imdisable
+
+        " Set QuickTemplatePath
+        let g:QuickTemplatePath = $HOME.'/.vim/templates/'
+
+        " 如果为空文件，则自动设置当前目录为桌面
+        " lcd ~/Desktop/
+    endif
+
+    " Under Linux/Unix etc.
+    if has("unix") && !has('gui_macvim')
+        set guifont=Courier\ 10\ Pitch\ 11
+    endif
 endif
