@@ -82,16 +82,27 @@ endfunc
 " ============
 " Environment
 " ============
+
 " 保留历史记录
 set history=500
 
 " 行控制
-set linebreak
+set linebreak "折行不断词，让英文阅读更舒服些
+"set nolinebreak "这是为了适应中文换行
 set nocompatible
 set wrap
 
 " 标签页
 set showtabline=2
+nmap <C-Tab> <C-w><C-w>
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-t> :tabnew<cr>
+nmap <C-p> :tabprevious<cr>
+nmap <C-n> :tabnext<cr>
+nmap <C-q> ZZ
 
 " 控制台响铃
 set noerrorbells
@@ -102,13 +113,18 @@ set t_vb= "close visual bell
 set number
 set ruler
 set rulerformat=%15(%c%V\ %p%%%)
+set scrolloff=5 "光标碰到第五行、倒数第五行时就上下卷屏
 
-" 命令行于状态行显示的信息很完整
+" 命令行于状态行显示的信息很完整包括行和列的信息
 set ch=1
-set stl=\ [File]\ %F%m%r%h%y[%{&fileformat},%{&fileencoding}]\ %w\ \ [PWD]\ %r%{GetPWD()}%h\ %=\ [Line]%l/%L\ %=\[%P]
+set stl=\ [File]\ %F%m%r%h%y[%{&fileformat},%{&fileencoding}]\ %w\ \ [PWD]\ %r%{GetPWD()}%h\ %=\ [Line]%l/%v/%L\ %=\[%P]
 set ls=2 " 始终显示状态行
 set wildmenu "命令行补全以增强模式运行
 set showcmd
+
+" 高亮所在行、列
+set cursorline
+set cursorcolumn
 
 " 定义 <Leader> 为逗号
 let mapleader = ","
@@ -133,11 +149,14 @@ set softtabstop=4
 set autoindent
 set smartindent
 
+"粘贴代码专用
+set pastetoggle=<F7>
+
 " 自动重新读入
 set autoread
 
 " 插入模式下使用 <BS>、<Del> <C-W> <C-U>
-set backspace=indent,eol,start
+set backspace=indent,eol,start "让 Backspace 键可以删除换行
 
 " 备份和缓存
 "set nobackup
@@ -145,3 +164,7 @@ set backspace=indent,eol,start
 
 " 代码折叠
 set foldmethod=marker
+
+" 快速编译快捷键暂时包括node 和
+map <f3> :w\|!node %<cr>
+map <f4> :w\|!python -i %<cr>
