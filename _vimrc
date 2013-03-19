@@ -258,8 +258,8 @@ if has("autocmd")
     au FileType php,javascript exe AutoClose()
     au FileType php,javascript exe MatchingQuotes()
 
-    " Auto Check Syntax
-    au BufWritePost,FileWritePost *.js,*.php call CheckSyntax(1)
+    " Auto Check Syntax 需要jslint等以后添加
+    " au BufWritePost,FileWritePost *.js,*.php call CheckSyntax(1)
 
     " JavaScript 语法高亮
     "au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
