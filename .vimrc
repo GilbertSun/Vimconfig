@@ -11,8 +11,8 @@
 "       实现迁移，配置文件参考mingcheng和yuest的git库，地址见文件头
 
 " vimrc文件修改后可以立即显现效果
-autocmd! bufwritepost _vimrc source %
-autocmd! bufwritepost _gvimrc source %
+autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .gvimrc source %
 
 " 确认vim的版本
 if v:version < 703
@@ -93,7 +93,7 @@ set nocompatible
 set wrap
 
 " 标签页
-set showtabline=2
+set showtabline=1
 
 " 控制台响铃
 set noerrorbells
@@ -112,10 +112,6 @@ set stl=\ [File]\ %F%m%r%h%y[%{&fileformat},%{&fileencoding}]\ %w\ \ [PWD]\ %r%{
 set ls=2 " 始终显示状态行
 set wildmenu "命令行补全以增强模式运行
 set showcmd
-
-" 高亮所在行、列
-set cursorline
-set cursorcolumn
 
 " 定义 <Leader> 为逗号
 let mapleader = ","
@@ -197,7 +193,6 @@ if has('persistent_undo')
     set undoreload=10000
 endif
 
-
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
 " http://www.vim.org/scripts/script.php?script_id=2332
@@ -209,7 +204,7 @@ call pathogen#infect()
 if has("autocmd")
     " 打开文件类型检测
     filetype plugin indent on
-
+    syntax enable
     " 括号自动补全
     func! AutoClose()
         :inoremap ( ()<ESC>i
@@ -286,6 +281,10 @@ endif
 if has('gui_running')
     " 只显示菜单
     " set guioptions=mcr
+
+    " 高亮所在行、列
+    set cursorline
+    set cursorcolumn
 
     if has("win32")
         " Windows 兼容配置
@@ -421,3 +420,34 @@ nmap <Leader>gff :call GotoFirstEffectiveLine()<cr>
 
 " 按下 Q 不进入 Ex 模式，而是退出
 nmap Q :x<cr>
+
+" =============
+" Color Scheme
+" =============
+if has('syntax')
+    if has('gui_running')
+        set background=light
+    else
+        set background=dark
+    endif
+
+    " http://ethanschoonover.com/solarized
+    ""colorscheme solarized
+
+    colorscheme zenburn
+
+    " 默认编辑器配色
+    au BufNewFile,BufRead,BufEnter,WinEnter * colo zenburn
+
+    " 各不同类型的文件配色不同
+    au BufNewFile,BufRead,BufEnter,WinEnter *.wiki colo lucius
+
+    " 保证语法高亮
+    syntax on
+endif
+
+" =================
+" Plugin Configure
+" =================
+" don't let NERD* plugin add to the menu
+let g:NERDMenuMode = 0
