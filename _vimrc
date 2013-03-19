@@ -137,6 +137,8 @@ set showmatch " Show matching bracets when text indicator is over them
 set mat=2     " How many tenths of a second to blink
 set incsearch
 set smartcase
+nmap <silent> <leader>/ :nohlsearch<CR>
+noremap <silent> <Space> :silent noh<CR>
 
 " 制表符使用4个空格进行缩进而不是tab
 set tabstop=4
@@ -159,8 +161,10 @@ set autoread
 set backspace=indent,eol,start "让 Backspace 键可以删除换行
 
 " 备份和缓存
-"set nobackup
+set nobackup
 "set noswapfile
+set hidden "让切换 buffer 保持 undo 记录
+set viminfo='1000,f1,<500,%,h "持久保存文件光标位置等信息
 
 " 代码折叠
 set foldmethod=marker
@@ -168,3 +172,121 @@ set foldmethod=marker
 " 快速编译快捷键暂时包括node 和
 map <f3> :w\|!node %<cr>
 map <f4> :w\|!python -i %<cr>
+
+" =====================
+" 多语言环境
+"    默认为 UTF-8 编码
+" =====================
+if has("multi_byte")
+    set encoding=utf-8
+    " English messages only
+    "language messages zh_CN.utf-8
+    
+    if has('win32')
+        language english
+        let &termencoding=&encoding
+    endif
+
+    set fencs=utf-8,gbk,chinese,latin1
+    set formatoptions+=mM
+    set nobomb " 不使用 Unicode 签名
+
+    if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
+        set ambiwidth=double
+    endif
+else
+    echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
+endif
+
+" 永久撤销，Vim7.3 新特性
+if has('persistent_undo')
+    set undofile
+
+    " 设置撤销文件的存放的目录
+    if has("unix")
+        set undodir=/tmp/,~/tmp,~/Temp
+    else
+        set undodir=d:/temp/
+    endif
+    set undolevels=1000
+    set undoreload=10000
+endif
+
+
+" Use pathogen to easily modify the runtime path to include all
+" plugins under the ~/.vim/bundle directory
+" http://www.vim.org/scripts/script.php?script_id=2332
+call pathogen#infect()
+
+" =========
+" AutoCmd
+" =========
+if has("autocmd")
+    " 打开文件类型检测
+    filetype plugin indent on
+
+    " 括号自动补全
+    func! AutoClose()
+        :inoremap ( ()<ESC>i
+        :inoremap " ""<ESC>i
+        :inoremap ' ''<ESC>i
+        :inoremap { {}<ESC>i
+        :inoremap [ []<ESC>i
+        :inoremap ) <c-r>=ClosePair(')')<CR>
+        :inoremap } <c-r>=ClosePair('}')<CR>
+        :inoremap ] <c-r>=ClosePair(']')<CR>
+    endf
+
+    func! ClosePair(char)
+        if getline('.')[col('.') - 1] == a:char
+            return "\<Right>"
+        else
+            return a:char
+        endif
+    endf
+
+    augroup vimrcEx
+        au!
+        autocmd FileType text setlocal textwidth=80
+        autocmd BufReadPost *
+                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                    \   exe "normal g`\"" |
+                    \ endif
+    augroup END
+
+    " Auto close quotation marks for PHP, Javascript, etc, file
+    au FileType php,javascript exe AutoClose()
+    au FileType php,javascript exe MatchingQuotes()
+
+    " Auto Check Syntax
+    au BufWritePost,FileWritePost *.js,*.php call CheckSyntax(1)
+
+    " JavaScript 语法高亮
+    "au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
+    "au BufRead,BufNewFile *.js setf jquery
+
+    " 给各语言文件添加 Dict
+    if has('win32')
+        let s:dict_dir = $VIM.'\vimfiles\dict\'
+    else
+        let s:dict_dir = $HOME."/.vim/dict/"
+    endif
+    let s:dict_dir = "setlocal dict+=".s:dict_dir
+
+    au FileType php exec s:dict_dir."php_funclist.dict"
+    au FileType css exec s:dict_dir."css.dict"
+    au FileType javascript exec s:dict_dir."javascript.dict"
+
+    " CSS3 语法支持
+    " au BufRead,BufNewFile *.css set ft=css syntax=css3
+
+    " 增加 Objective-C 语法支持
+    " au BufNewFile,BufRead,BufEnter,WinEnter,FileType *.m,*.h setf objc
+
+    " 将指定文件的换行符转换成 UNIX 格式
+    au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
+
+    " 保存编辑状态
+    au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
+    au BufRead     * if expand('%') != '' && &buftype == '' | silent loadview | syntax on | endif
+endif
