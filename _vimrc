@@ -94,15 +94,6 @@ set wrap
 
 " 标签页
 set showtabline=2
-nmap <C-Tab> <C-w><C-w>
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-t> :tabnew<cr>
-nmap <C-p> :tabprevious<cr>
-nmap <C-n> :tabnext<cr>
-nmap <C-q> ZZ
 
 " 控制台响铃
 set noerrorbells
@@ -137,8 +128,6 @@ set showmatch " Show matching bracets when text indicator is over them
 set mat=2     " How many tenths of a second to blink
 set incsearch
 set smartcase
-nmap <silent> <leader>/ :nohlsearch<CR>
-noremap <silent> <Space> :silent noh<CR>
 
 " 制表符使用4个空格进行缩进而不是tab
 set tabstop=4
@@ -168,10 +157,6 @@ set viminfo='1000,f1,<500,%,h "持久保存文件光标位置等信息
 
 " 代码折叠
 set foldmethod=marker
-
-" 快速编译快捷键暂时包括node 和
-map <f3> :w\|!node %<cr>
-map <f4> :w\|!python -i %<cr>
 
 " =====================
 " 多语言环境
@@ -377,3 +362,62 @@ if has('gui_running')
         set guifont=Courier\ 10\ Pitch\ 11
     endif
 endif
+
+" =============
+" Key Shortcut
+" =============
+
+" 快速编译快捷键暂时包括node 和
+map <f3> :w\|!node %<cr>
+map <f4> :w\|!python -i %<cr>
+
+" 搜索相关快捷键
+nmap <silent> <leader>/ :nohlsearch<CR>
+noremap <silent> <Space> :silent noh<CR>
+
+" tab页相关快捷键
+nmap <C-Tab> <C-w><C-w>
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-t> :tabnew<cr>
+nmap <C-p> :tabprevious<cr>
+nmap <C-n> :tabnext<cr>
+nmap <C-q> ZZ 
+
+" insert mode shortcut
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <Delete>
+
+"for i in range(1, &tabpagemax)
+"    exec 'nmap <A-'.i.'> '.i.'gt'
+"endfor
+
+" 插件快捷键
+nmap <C-d> :NERDTree<cr>
+nmap <C-e> :BufExplorer<cr>
+nmap <f2>  :BufExplorer<cr>
+nmap <F10> :NERDTreeToggle<cr>
+
+" 插入模式按 F4 插入当前时间
+imap <f4> <C-r>=GetDateStamp()<cr>
+
+" 新建 XHTML 、PHP、Javascript 文件的快捷键
+nmap <C-c><C-h> :NewQuickTemplateTab xhtml<cr>
+nmap <C-c><C-p> :NewQuickTemplateTab php<cr>
+nmap <C-c><C-j> :NewQuickTemplateTab javascript<cr>
+nmap <C-c><C-c> :NewQuickTemplateTab css<cr>
+nmap <Leader>ca :Calendar<cr>
+nmap <Leader>mr :MRU<cr>
+nmap <Leader>dd :NERDTree<cr>
+nmap <Leader>bf :BufExplorer<cr>
+
+" 直接查看第一行生效的代码
+nmap <Leader>gff :call GotoFirstEffectiveLine()<cr>
+
+" 按下 Q 不进入 Ex 模式，而是退出
+nmap Q :x<cr>
