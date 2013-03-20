@@ -451,3 +451,19 @@ endif
 " =================
 " don't let NERD* plugin add to the menu
 let g:NERDMenuMode = 0
+
+" ZenCoding 方便写HTML
+" http://www.vim.org/scripts/script.php?script_id=2981
+"let g:user_zen_leader_key = '<c-i>'
+let g:user_zen_settings = {
+\  'indentation' : '  ',
+\  'perl' : {
+\    'aliases' : {
+\      'req' : 'require '
+\    },
+\    'snippets' : {
+\      'use' : "use strict\nuse warnings\n\n",
+\      'warn' : "warn \"|\";",
+\    }
+\  }
+\}
