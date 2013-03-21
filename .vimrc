@@ -272,6 +272,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.j2,*.mustache set filetype=html
     au BufRead,BufNewFile *.k set filetype=javascript
     au BufRead,BufNewFile *.sibilant set filetype=scheme
+	au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
     autocmd FileType html,jade,javascript,scheme,coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
 endif
 
