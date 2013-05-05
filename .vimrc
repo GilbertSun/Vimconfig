@@ -11,6 +11,9 @@
 "       实现迁移，配置文件参考mingcheng和yuest的git库，地址见文件头
 
 " vimrc文件修改后可以立即显现效果
+"
+" [+!] 2013-05-06
+" 添加了php等的自动完成(alt+/)，修改了viminfo的参数不保存缓存区
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -149,7 +152,7 @@ set backspace=indent,eol,start "让 Backspace 键可以删除换行
 set nobackup
 "set noswapfile
 set hidden "让切换 buffer 保持 undo 记录
-set viminfo='1000,f1,<500,%,h "持久保存文件光标位置等信息
+set viminfo='1000,f1,<500,h "持久保存文件光标位置等信息
 
 " 代码折叠
 set foldmethod=marker
@@ -369,7 +372,8 @@ endif
 
 " 快速编译快捷键暂时包括node 和
 map <f3> :w\|!node %<cr>
-map <f4> :w\|!python -i %<cr>
+"map <f4> :w\|!python -i %<cr>
+map <f4> :w\|!python %<cr>
 
 " 搜索相关快捷键
 nmap <silent> <leader>/ :nohlsearch<CR>
