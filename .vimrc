@@ -17,6 +17,7 @@
 "
 " [+] 2013-05-30
 " 添加了对coffee-script的支持，以submodule的形式加入的，所以可以单独更新
+" 添加了coffee-script的快捷键，添加了执行命令行的插件conque
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -377,6 +378,7 @@ endif
 map <f3> :w\|!node %<cr>
 "map <f4> :w\|!python -i %<cr>
 map <f4> :w\|!python %<cr>
+map <f6> :w\|!coffee -c %<cr>
 
 " 搜索相关快捷键
 nmap <silent> <leader>/ :nohlsearch<CR>
