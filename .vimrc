@@ -14,6 +14,9 @@
 "
 " [+!] 2013-05-06
 " 添加了php等的自动完成(alt+/)，修改了viminfo的参数不保存缓存区
+"
+" [+] 2013-05-30
+" 添加了对coffee-script的支持，以submodule的形式加入的，所以可以单独更新
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
