@@ -18,6 +18,9 @@
 " [+] 2013-05-30
 " 添加了对coffee-script的支持，以submodule的形式加入的，所以可以单独更新
 " 添加了coffee-script的快捷键，添加了执行命令行的插件conque
+"
+" [+]2013-06-06
+" 添加了matrix插件，主要是闲着无聊为了好玩 :Matrix
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
