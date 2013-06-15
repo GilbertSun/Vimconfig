@@ -19,6 +19,9 @@
 " 添加了对coffee-script的支持，以submodule的形式加入的，所以可以单独更新
 " 添加了coffee-script的快捷键，添加了执行命令行的插件conque
 "
+" [+]2013-06-06
+" 添加了matrix插件，主要是闲着无聊为了好玩 :Matrix
+"
 " [+]2013-06-09
 " 添加了检测ejs文件类型的选项，并且设置markdown的fdm为marker
 autocmd! bufwritepost .vimrc source %
