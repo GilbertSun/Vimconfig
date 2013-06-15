@@ -101,7 +101,8 @@ syn region mkdListFold
     \ fold contains=TOP
 
 syn sync fromstart
-setlocal foldmethod=syntax
+"setlocal foldmethod=syntax
+setlocal foldmethod=marker
 
 
 

@@ -18,6 +18,9 @@
 " [+] 2013-05-30
 " 添加了对coffee-script的支持，以submodule的形式加入的，所以可以单独更新
 " 添加了coffee-script的快捷键，添加了执行命令行的插件conque
+"
+" [+]2013-06-09
+" 添加了检测ejs文件类型的选项，并且设置markdown的fdm为marker
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -276,7 +279,7 @@ if has("autocmd")
     " 保存编辑状态
     " au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
     " au BufRead     * if expand('%') != '' && &buftype == '' | silent loadview | syntax on | endif
-    au BufRead,BufNewFile *.j2,*.mustache set filetype=html
+    au BufRead,BufNewFile *.ejs,*.j2,*.mustache set filetype=html
     au BufRead,BufNewFile *.k set filetype=javascript
     au BufRead,BufNewFile *.sibilant set filetype=scheme
 	au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
