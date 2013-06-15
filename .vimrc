@@ -24,6 +24,9 @@
 "
 " [+]2013-06-09
 " 添加了检测ejs文件类型的选项，并且设置markdown的fdm为marker
+"
+" [+]2013-06-15
+" 通过K可以查询PHP的内建函数，主要是修改了keywordprg
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -278,6 +281,9 @@ if has("autocmd")
 
     " 将指定文件的换行符转换成 UNIX 格式
     au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
+
+    " 设置PHP的内建K查询为help
+    au FileType php set keywordprg="help"
 
     " 保存编辑状态
     " au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
