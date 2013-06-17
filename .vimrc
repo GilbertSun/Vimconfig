@@ -27,7 +27,6 @@
 "
 " [+]2013-06-15
 " 通过K可以查询PHP的内建函数，主要是修改了keywordprg
-" php的debug，具体需要看bundle/global/plugin/debugger.vim
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 

@@ -127,10 +127,10 @@ else
   call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
 endif
 
-map <F1> :python debugger_resize()<cr>
-map <F2> :python debugger_command('step_into')<cr>
-map <F3> :python debugger_command('step_over')<cr>
-map <F4> :python debugger_command('step_out')<cr>
+imap <F1> <esc>:python debugger_resize()<cr>
+imap <F2> <esc>:python debugger_command('step_into')<cr>
+imap <F3> <esc>:python debugger_command('step_over')<cr>
+imap <F4> <esc>:python debugger_command('step_out')<cr>
 
 map <Leader>dr :python debugger_resize()<cr>
 map <Leader>di :python debugger_command('step_into')<cr>
@@ -139,17 +139,17 @@ map <Leader>dt :python debugger_command('step_out')<cr>
 
 nnoremap ,e :python debugger_watch_input("eval")<cr>A
 
-map <F5> :python debugger_run()<cr>
-map <F6> :python debugger_quit()<cr>
+imap <F5> <esc>:python debugger_run()<cr>
+imap <F6> <esc>:python debugger_quit()<cr>
 
-map <F7> :python debugger_command('step_into')<cr>
-map <F8> :python debugger_command('step_over')<cr>
-map <F9> :python debugger_command('step_out')<cr>
+imap <F7> <esc>:python debugger_command('step_into')<cr>
+imap <F8> <esc>:python debugger_command('step_over')<cr>
+imap <F9> <esc>:python debugger_command('step_out')<cr>
 
-map <F11> :python debugger_context()<cr>
-map <F12> :python debugger_property()<cr>
-map <F11> :python debugger_watch_input("context_get")<cr>A<cr>
-map <F12> :python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
+imap <F11> <esc>:python debugger_context()<cr>
+imap <F12> <esc>:python debugger_property()<cr>
+imap <F11> <esc>:python debugger_watch_input("context_get")<cr>A<cr>
+imap <F12> <esc>:python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
 
 hi DbgCurrent term=reverse ctermfg=White ctermbg=Red gui=reverse
 hi DbgBreakPt term=reverse ctermfg=White ctermbg=Green gui=reverse
