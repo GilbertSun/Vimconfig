@@ -30,6 +30,7 @@
 "
 " [+]2013-08-26
 " 添加matchit插件
+" 修改alt+/为匹配字典的功能
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -416,6 +417,7 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <Delete>
+imap <A-/> <C-x><C-k>
 
 "for i in range(1, &tabpagemax)
 "    exec 'nmap <A-'.i.'> '.i.'gt'

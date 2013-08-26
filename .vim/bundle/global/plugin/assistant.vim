@@ -22,8 +22,8 @@ let g:loaded_assistant = "Version 1.5.2"
 "nmap <silent> <unique> <C-k> :call <SID>Help()<Cr>
 "
 " Mapping for Eclipse user
- imap <silent> <unique> <A-/> <C-x><C-u>
- nmap <silent> <unique> <A-/> :call <SID>Help()<Cr>
+" imap <silent> <unique> <A-/> <C-x><C-u>
+" nmap <silent> <unique> <A-/> :call <SID>Help()<Cr>
 "
 " Mapping for Netbeans user
 " imap <silent> <unique> <C-\> <C-x><C-u>
