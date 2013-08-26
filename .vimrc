@@ -27,6 +27,9 @@
 "
 " [+]2013-06-15
 " 通过K可以查询PHP的内建函数，主要是修改了keywordprg
+"
+" [+]2013-08-26
+" 添加matchit插件
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
