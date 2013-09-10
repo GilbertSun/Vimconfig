@@ -31,6 +31,9 @@
 " [+]2013-08-26
 " 添加matchit插件
 " 修改alt+/为匹配字典的功能
+" 
+" [!]2013-09-09
+" change the formatingoption of file
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -111,6 +114,7 @@ set linebreak "折行不断词，让英文阅读更舒服些
 "set nolinebreak "这是为了适应中文换行
 set nocompatible
 set wrap
+set textwidth=80
 
 " 标签页
 set showtabline=1
@@ -297,6 +301,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.sibilant set filetype=scheme
 	au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
     autocmd FileType html,jade,javascript,scheme,coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    au FileType javascript setlocal fo+=t
 endif
 
 " =========
