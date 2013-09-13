@@ -233,47 +233,10 @@ call pathogen#infect()
 if has("autocmd")
     " 打开文件类型检测
     filetype plugin indent on
-    syntax enable
-    " 括号自动补全
-    func! AutoClose()
-        :inoremap ( ()<ESC>i
-        :inoremap " ""<ESC>i
-        :inoremap ' ''<ESC>i
-        :inoremap { {}<ESC>i
-        :inoremap [ []<ESC>i
-        :inoremap ) <c-r>=ClosePair(')')<CR>
-        :inoremap } <c-r>=ClosePair('}')<CR>
-        :inoremap ] <c-r>=ClosePair(']')<CR>
-    endf
-
-    func! ClosePair(char)
-        if getline('.')[col('.') - 1] == a:char
-            return "\<Right>"
-        else
-            return a:char
-        endif
-    endf
-
-    augroup vimrcEx
-        au!
-        autocmd FileType text setlocal textwidth=80
-        autocmd BufReadPost *
-                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                    \   exe "normal g`\"" |
-                    \ endif
-    augroup END
-
-    " Auto close quotation marks for PHP, Javascript, etc, file
-    "au FileType php,javascript exe AutoClose()
-    "au FileType php,javascript exe MatchingQuotes()
 
     " Auto Check Syntax 需要jslint等以后添加
     " au BufWritePost,FileWritePost *.js,*.php call CheckSyntax(1)
 
-    " JavaScript 语法高亮
-    "au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
-    au BufRead,BufNewFile jquery*.js set ft=javascript syntax=jquery
-    au BufRead,BufNewFile *.json set ft=json
 
     " 给各语言文件添加 Dict
     if has('win32')
@@ -287,27 +250,19 @@ if has("autocmd")
     au FileType css exec s:dict_dir."css.dict"
     au FileType javascript exec s:dict_dir."javascript.dict"
 
-    " CSS3 语法支持
-    " au BufRead,BufNewFile *.css set ft=css syntax=css3
-
-    " 增加 Objective-C 语法支持
-    " au BufNewFile,BufRead,BufEnter,WinEnter,FileType *.m,*.h setf objc
 
     " 将指定文件的换行符转换成 UNIX 格式
     au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
 
-    " 设置PHP的内建K查询为help
-    au FileType php set keywordprg="help"
 
-    " 保存编辑状态
-    " au BufWinLeave * if expand('%') != '' && &buftype == '' | mkview | endif
-    " au BufRead     * if expand('%') != '' && &buftype == '' | silent loadview | syntax on | endif
     au BufRead,BufNewFile *.ejs,*.j2,*.mustache set filetype=html
     au BufRead,BufNewFile *.k set filetype=javascript
     au BufRead,BufNewFile *.sibilant set filetype=scheme
 	au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
-    autocmd FileType html,jade,javascript,scheme,coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    au FileType html,jade,javascript,scheme,coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
     au FileType javascript setlocal fo+=t
+    au BufRead,BufNewFile jquery*.js set ft=javascript syntax=jquery
+    au BufRead,BufNewFile *.json set ft=json
 endif
 
 " =========
@@ -443,16 +398,6 @@ nmap <F10> :NERDTreeToggle<cr>
 " 插入模式按 F4 插入当前时间
 imap <f4> <C-r>=GetDateStamp()<cr>
 
-" 新建 XHTML 、PHP、Javascript 文件的快捷键
-nmap <C-c><C-h> :NewQuickTemplateTab xhtml<cr>
-nmap <C-c><C-p> :NewQuickTemplateTab php<cr>
-nmap <C-c><C-j> :NewQuickTemplateTab javascript<cr>
-nmap <C-c><C-c> :NewQuickTemplateTab css<cr>
-nmap <Leader>ca :Calendar<cr>
-nmap <Leader>mr :MRU<cr>
-nmap <Leader>dd :NERDTree<cr>
-nmap <Leader>bf :BufExplorer<cr>
-
 " 直接查看第一行生效的代码
 nmap <Leader>gff :call GotoFirstEffectiveLine()<cr>
 
@@ -471,8 +416,6 @@ if has('syntax')
 
     " http://ethanschoonover.com/solarized
     ""colorscheme solarized
-
-    colorscheme zenburn
 
     " 默认编辑器配色
     au BufNewFile,BufRead,BufEnter,WinEnter * colo zenburn
