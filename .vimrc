@@ -34,6 +34,9 @@
 " 
 " [!]2013-09-09
 " change the formatingoption of file
+"
+" [!]2013-09-13
+" 为了解决自己的一些疑惑，做了一些小的修改
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost .gvimrc source %
 
@@ -106,13 +109,15 @@ endfunc
 " Environment
 " ============
 
+" 关闭快捷键兼容
+set nocompatible
+
 " 保留历史记录
 set history=500
 
 " 行控制
 set linebreak "折行不断词，让英文阅读更舒服些
 "set nolinebreak "这是为了适应中文换行
-set nocompatible
 set wrap
 set textwidth=80
 
@@ -176,7 +181,7 @@ set hidden "让切换 buffer 保持 undo 记录
 set viminfo='1000,f1,<500,h "持久保存文件光标位置等信息
 
 " 代码折叠
-set foldmethod=marker
+set foldmethod=manual
 
 " =====================
 " 多语言环境
@@ -259,8 +264,8 @@ if has("autocmd")
     augroup END
 
     " Auto close quotation marks for PHP, Javascript, etc, file
-    au FileType php,javascript exe AutoClose()
-    au FileType php,javascript exe MatchingQuotes()
+    "au FileType php,javascript exe AutoClose()
+    "au FileType php,javascript exe MatchingQuotes()
 
     " Auto Check Syntax 需要jslint等以后添加
     " au BufWritePost,FileWritePost *.js,*.php call CheckSyntax(1)
