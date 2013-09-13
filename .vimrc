@@ -408,17 +408,12 @@ nmap Q :x<cr>
 " Color Scheme
 " =============
 if has('syntax')
-    if has('gui_running')
-        set background=light
-    else
-        set background=dark
-    endif
 
     " http://ethanschoonover.com/solarized
     ""colorscheme solarized
 
     " 默认编辑器配色
-    au BufNewFile,BufRead,BufEnter,WinEnter * colo zenburn
+    au BufNewFile,BufRead,BufEnter,WinEnter * colo desert
 
     " 各不同类型的文件配色不同
     au BufNewFile,BufRead,BufEnter,WinEnter *.wiki colo lucius
