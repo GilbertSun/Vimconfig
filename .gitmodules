@@ -4,3 +4,12 @@
 [submodule ".vim/bundle/emmet"]
 	path = .vim/bundle/emmet
 	url = git@github.com:mattn/emmet-vim.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule ".vim/bundle/checksyntax_vim"]
+	path = .vim/bundle/checksyntax_vim
+	url = git@github.com:tomtom/checksyntax_vim.git
+[submodule ".vim/bundle/html5"]
+	path = .vim/bundle/html5
+	url = git@github.com:othree/html5.vim.git

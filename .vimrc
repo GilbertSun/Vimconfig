@@ -272,7 +272,8 @@ if has("autocmd")
 
     " JavaScript 语法高亮
     "au FileType html,javascript let g:javascript_enable_domhtmlcss = 1
-    "au BufRead,BufNewFile *.js setf jquery
+    au BufRead,BufNewFile jquery*.js set ft=javascript syntax=jquery
+    au BufRead,BufNewFile *.json set ft=json
 
     " 给各语言文件添加 Dict
     if has('win32')
