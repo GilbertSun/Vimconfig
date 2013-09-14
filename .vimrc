@@ -443,3 +443,9 @@ let g:user_emmet_settings = {
 \    }
 \  }
 \}
+
+" vim-snimate
+
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
