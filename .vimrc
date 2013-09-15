@@ -359,8 +359,6 @@ endif
 
 " 快速编译快捷键暂时包括node 和
 map <f3> :w\|!node %<cr>
-"map <f4> :w\|!python -i %<cr>
-map <f4> :w\|!python %<cr>
 map <f6> :w\|!coffee -c %<cr>
 
 " 搜索相关快捷键
@@ -449,3 +447,4 @@ let g:user_emmet_settings = {
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
+let g:snipMate.scope_aliases['less'] = 'css'
