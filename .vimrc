@@ -261,8 +261,8 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
     au FileType html,jade,scheme,css,less setlocal shiftwidth=2 tabstop=2 softtabstop=2
     au FileType javascript,coffee setlocal shiftwidth=4 tabstop=4 softtabstop=4
-    au FileType javascript setlocal fo+=t
-    au FileType css,less setlocal fo-=t
+"    au FileType javascript setlocal fo+=t
+    au FileType css,less,html setlocal fo-=t
     au BufRead,BufNewFile jquery*.js set ft=javascript syntax=jquery
     au BufRead,BufNewFile *.json set ft=json
 endif
